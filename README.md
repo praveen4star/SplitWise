@@ -1,5 +1,10 @@
 # SplitWise
 ## Features
+ - Users can register and update their profiles
+ - A user's profile should contain at least their name, phone number and password
+ - Users can participate in expenses with other users
+ - Users can participate in groups.
+ - To add an expense, a user must specify either the group, or the other users involved in the expense, along with who paid what and who owes what. They must also specify a description for the expense
  - A user can see their total owed amount
  - A user can see a history of the expenses they're involved in
  - A user can see a history of the expenses made in a group that they're participating in
