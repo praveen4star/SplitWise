@@ -1,31 +1,10 @@
-# Getting Started
-
-### Reference Documentation
-
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.2.0/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.2.0/maven-plugin/reference/html/#build-image)
-* [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/3.2.0/reference/htmlsingle/index.html#appendix.configuration-metadata.annotation-processor)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.2.0/reference/htmlsingle/index.html#data.sql.jpa-and-spring-data)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/3.2.0/reference/htmlsingle/index.html#using.devtools)
-
-### Guides
-
-The following guides illustrate how to use some features concretely:
-
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-
-## GraphQL code generation with DGS
-
-This project has been configured to use the Netflix DGS Codegen plugin.
-This plugin can be used to generate client files for accessing remote GraphQL services.
-The default setup assumes that the GraphQL schema file for the remote service is added to
-the `src/main/resources/graphql-client/` location.
-
-You can learn more about the [plugin configuration options](https://github.com/deweyjose/graphqlcodegen) and
-[how to use the generated types](https://netflix.github.io/dgs/generating-code-from-schema/) to adapt the default setup.
-
+# SplitWise
+## Features
+ - A user can see their total owed amount
+ - A user can see a history of the expenses they're involved in
+ - A user can see a history of the expenses made in a group that they're participating in
+ - Users shouldn't be able to query about groups they are not a member of 
+ - Only the user who has created a group can add/remove members to the group
+ - Users can request a settle-up. The application should show a list of transactions, which when executed will ensure that the user no longer owes or receives money from any other user. Note that this need not settle-up any other users.Users can request a settle-up for any group they're participating in. The application should show a list of transactions, which if executed, will ensure that everyone participating in the group is settled up (owes a net of 0 Rs). Note that will only deal with the expenses made inside that group. Expenses outside the group need not be settled. Good to Have Requirements
+ - When settling a group, we should try to minimize the number of transactions that the group members should make to settle up.
 
