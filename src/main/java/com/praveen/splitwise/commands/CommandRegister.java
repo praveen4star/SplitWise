@@ -1,6 +1,5 @@
 package com.praveen.splitwise.commands;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CommandRegistory {
+public class CommandRegister {
     private  List<Command> commands ;
     @Autowired
-    public CommandRegistory( RegisterCommand registerCommand){
+    public CommandRegister(RegisterCommand registerCommand){
         commands = new ArrayList<>();
         commands.add(registerCommand);
     }

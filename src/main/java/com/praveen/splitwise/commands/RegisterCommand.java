@@ -1,7 +1,7 @@
 package com.praveen.splitwise.commands;
 
 import com.praveen.splitwise.controllers.UserController;
-import com.praveen.splitwise.dtos.UserRequestDtos;
+import com.praveen.splitwise.dtos.UserRequestDto;
 import com.praveen.splitwise.dtos.UserResponseDto;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +21,11 @@ public class RegisterCommand implements Command{
     }
     public void execute(String command){
         List<String> commandList = List.of(command.split(" "));
-        UserRequestDtos userRequestDtos = new UserRequestDtos();
+        UserRequestDto userRequestDtos = new UserRequestDto();
         userRequestDtos.setName(commandList.get(1));
         userRequestDtos.setPhoneNumber(commandList.get(2));
         userRequestDtos.setPassword(commandList.get(3));
-        UserResponseDto userResponseDto=  userController.resgisterUser(userRequestDtos);
+        UserResponseDto userResponseDto=  userController.registerUser(userRequestDtos);
         System.out.println(userResponseDto.getMessage());
     }
 }

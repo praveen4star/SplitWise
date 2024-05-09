@@ -3,33 +3,35 @@ package com.praveen.splitwise.services;
 import com.praveen.splitwise.exceptions.UserAlreadyExistsException;
 import com.praveen.splitwise.models.User;
 import com.praveen.splitwise.models.UserStatus;
-import com.praveen.splitwise.repositories.UserRepostory;
+import com.praveen.splitwise.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserServies {
-    private UserRepostory userRepostory;
-    public UserServies(
-            UserRepostory userRepostory
+public class UserService {
+    private UserRepository userRepository;
+    @Autowired
+    public UserService(
+            UserRepository userRepository
     ){
-        this.userRepostory = userRepostory;
+        this.userRepository = userRepository;
     }
     public User registerUser(String name, String phoneNumber, String password) throws UserAlreadyExistsException {
 
-        Optional<User> optionalUser = userRepostory.findByPhoneNumber(phoneNumber);
+        Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
         if(optionalUser.isPresent()){
 
             User user = optionalUser.get();
             if(user.getUserStatus().equals(UserStatus.ACTIVE)){
-                throw new UserAlreadyExistsException("User already exists");
+                throw new UserAlreadyExistsException("User already exists "+"phoneNumber: "+phoneNumber);
             }
             else{
                 user.setUserStatus(UserStatus.ACTIVE);
                 user.setName(name);
                 user.setPassword(password);
-                return userRepostory.save(user);
+                return userRepository.save(user);
             }
         }
 
@@ -38,7 +40,7 @@ public class UserServies {
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
         user.setUserStatus(UserStatus.ACTIVE);
-        return userRepostory.save(user);
+        return userRepository.save(user);
 
     }
 }

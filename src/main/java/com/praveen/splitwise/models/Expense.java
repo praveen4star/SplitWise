@@ -19,4 +19,7 @@ public class Expense extends BaseModel{
     private Group group;
     @ManyToOne
     private User createdBy;
+
+
+
 }

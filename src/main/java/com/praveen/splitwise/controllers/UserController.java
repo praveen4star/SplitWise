@@ -1,21 +1,21 @@
 package com.praveen.splitwise.controllers;
 
-import com.praveen.splitwise.dtos.UserRequestDtos;
+import com.praveen.splitwise.dtos.UserRequestDto;
 import com.praveen.splitwise.dtos.UserResponseDto;
 import com.praveen.splitwise.exceptions.UserAlreadyExistsException;
 import com.praveen.splitwise.models.User;
-import com.praveen.splitwise.services.UserServies;
+import com.praveen.splitwise.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserController {
-    private UserServies userServies;
+    private UserService userServies;
     @Autowired
-    public UserController(UserServies userServies){
+    public UserController(UserService userServies){
         this.userServies = userServies;
     }
-    public UserResponseDto resgisterUser(UserRequestDtos userRequestDtos){
+    public UserResponseDto registerUser(UserRequestDto userRequestDtos){
         UserResponseDto userResponseDto = new UserResponseDto();
         try {
             User user = userServies.registerUser(userRequestDtos.getName(), userRequestDtos.getPhoneNumber(), userRequestDtos.getPassword());
