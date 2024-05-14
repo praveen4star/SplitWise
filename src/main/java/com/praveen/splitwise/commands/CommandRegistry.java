@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CommandRegister {
+public class CommandRegistry {
     private  List<Command> commands ;
     @Autowired
-    public CommandRegister(RegisterCommand registerCommand){
+    public CommandRegistry(RegisterCommand registerCommand){
         commands = new ArrayList<>();
         commands.add(registerCommand);
     }
