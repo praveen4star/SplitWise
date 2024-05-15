@@ -1,6 +1,7 @@
 package com.praveen.splitwise.services;
 
 import com.praveen.splitwise.exceptions.UserAlreadyExistsException;
+import com.praveen.splitwise.exceptions.UserNotFoundException;
 import com.praveen.splitwise.models.User;
 import com.praveen.splitwise.models.UserStatus;
 import com.praveen.splitwise.repositories.UserRepository;
@@ -41,6 +42,17 @@ public class UserService {
         user.setPassword(password);
         user.setUserStatus(UserStatus.ACTIVE);
         return userRepository.save(user);
+
+    }
+    public User updateUser(Long userId, String password) throws UserNotFoundException {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setUserStatus(UserStatus.ACTIVE);
+            user.setPassword(password);
+            return userRepository.save(user);
+        }
+        throw new UserNotFoundException("User not found "+"userId: "+userId);
 
     }
 }

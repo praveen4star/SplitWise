@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
-public class RegisterCommand implements Command{
+public class RegisterUserCommand implements Command{
     private UserController userController;
-    public RegisterCommand(UserController userController){
+    public RegisterUserCommand(UserController userController){
         this.userController = userController;
     }
     public boolean isMatch(String command){

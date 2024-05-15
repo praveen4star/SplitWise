@@ -10,9 +10,10 @@ import java.util.List;
 public class CommandRegistry {
     private  List<Command> commands ;
     @Autowired
-    public CommandRegistry(RegisterCommand registerCommand){
+    public CommandRegistry(RegisterUserCommand registerCommand, UpdateUserCommand updateCommand){
         commands = new ArrayList<>();
         commands.add(registerCommand);
+        commands.add(updateCommand);
     }
     public void execute(String commandName){
         for(Command command: commands){
