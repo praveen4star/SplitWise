@@ -6,4 +6,5 @@ public interface CommandKeyword {
     String ADD_GROUP = "AddGroup";
     String ADD_GROUP_MEMBER = "AddMember";
     String GET_USER_GROUPS = "groups";
+    String GROUP_EXPENSE = "groupExpense";
 }

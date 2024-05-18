@@ -60,7 +60,7 @@ u1 SettleUp g1
 > u1 is asking to see the list of transactions that need to be performed by members of g1 to
 completely settle up the group.
 -- --
-u1 Expense g1 iPay 1000 Equal Desc Wifi Bill
+u1 groupExpense g1 iPay 1000 Equal Desc Wifi Bill
 > u1 is adding an expense in the group g1.
 > u1 paid 1000 Rs
 > each user of g1 owes an equal amount (the exact amount will depend on the number of users in group g1. Say g1 has 5
