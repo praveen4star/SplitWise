@@ -55,4 +55,11 @@ public class UserService {
         throw new UserNotFoundException("User not found "+"userId: "+userId);
 
     }
+    public User getUser(Long userId) throws UserNotFoundException {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isPresent()){
+            return optionalUser.get();
+        }
+        throw new UserNotFoundException("User not found "+"userId: "+userId);
+    }
 }

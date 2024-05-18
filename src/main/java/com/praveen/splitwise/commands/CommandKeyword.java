@@ -5,4 +5,5 @@ public interface CommandKeyword {
     String UPDATE_PROFILE = "UpdateProfile";
     String ADD_GROUP = "AddGroup";
     String ADD_GROUP_MEMBER = "AddMember";
+    String GET_USER_GROUPS = "groups";
 }

@@ -20,9 +20,10 @@ public class SplitWiseApplication implements CommandLineRunner {
         scanner = new Scanner(System.in);
     }
     public void run(String... args) throws Exception {
-        while(true){
+        String input = "";
+        while(!input.equalsIgnoreCase("exit")){
             System.out.println("Tell me, what do you want to do?");
-            String input = scanner.nextLine();
+            input = scanner.nextLine();
             commandRegistory.execute(input);
         }
 

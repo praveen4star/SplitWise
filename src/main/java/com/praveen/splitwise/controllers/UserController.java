@@ -1,8 +1,6 @@
 package com.praveen.splitwise.controllers;
 
-import com.praveen.splitwise.dtos.UpdateUserRequestDto;
-import com.praveen.splitwise.dtos.UserRequestDto;
-import com.praveen.splitwise.dtos.UserResponseDto;
+import com.praveen.splitwise.dtos.*;
 import com.praveen.splitwise.exceptions.UserAlreadyExistsException;
 import com.praveen.splitwise.exceptions.UserNotFoundException;
 import com.praveen.splitwise.models.User;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserController {
-    private UserService userServies;
+    private final UserService userServies;
     @Autowired
     public UserController(UserService userServes){
         this.userServies = userServes;
@@ -44,5 +42,18 @@ public class UserController {
         }
         return userResponseDto;
     }
-
+    public UserGroupResponseDto getUserGroup(UserGroupRequestDto userGroupRequestDto){
+        UserGroupResponseDto userGroupResponseDto = new UserGroupResponseDto();
+        try {
+            User user = userServies.getUser(userGroupRequestDto.getUserId());
+            userGroupResponseDto.setUserGroups(user.getGroups());
+            userGroupResponseDto.setStatusCode(200);
+            userGroupResponseDto.setMessage("User groups fetched successfully");
+        }
+        catch (UserNotFoundException e){
+            userGroupResponseDto.setStatusCode(400);
+            userGroupResponseDto.setMessage(e.getMessage());
+        }
+        return userGroupResponseDto;
+    }
 }

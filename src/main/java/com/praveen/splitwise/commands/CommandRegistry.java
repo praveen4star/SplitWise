@@ -10,12 +10,19 @@ import java.util.List;
 public class CommandRegistry {
     private  final List<Command> commands ;
     @Autowired
-    public CommandRegistry(RegisterUserCommand registerCommand, UpdateUserCommand updateCommand, AddGroupCommand addGroupCommand, AddGroupMember addGroupMember){
+    public CommandRegistry(
+            RegisterUserCommand registerCommand,
+            UpdateUserCommand updateCommand,
+            AddGroupCommand addGroupCommand,
+            AddGroupMember addGroupMember,
+            UserGroupCommand userGroupCommand
+    ){
         commands = new ArrayList<>();
         commands.add(registerCommand);
         commands.add(updateCommand);
         commands.add(addGroupCommand);
         commands.add(addGroupMember);
+        commands.add(userGroupCommand);
     }
     public void execute(String commandName){
         boolean isMatch = false;
