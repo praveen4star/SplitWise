@@ -121,33 +121,7 @@ u1 Expense g1 iPay 1000 Percentage 10 20 30 40
 Assume that the members in the group are organised by their userids in ascending order
 
 
+## Clas Diagram
 
-Main
--> COmmand Executor
-->
+![Class Entity Diagram](SplitWise.drawio.png)
 
-
-Multiple Clients
-// MVC
-// Model View COntroller
-
-///
-src
-controllers
-models
-services
-repositories
-common
-strategies
-
-///
-
-- User
-- Expense
-- Group
-- Transaction
-
-
-
-
-[Multiple Clients] -> Controller
