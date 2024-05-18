@@ -8,19 +8,26 @@ import java.util.List;
 
 @Component
 public class CommandRegistry {
-    private  List<Command> commands ;
+    private  final List<Command> commands ;
     @Autowired
-    public CommandRegistry(RegisterUserCommand registerCommand, UpdateUserCommand updateCommand, AddGroupCommand addGroupCommand){
+    public CommandRegistry(RegisterUserCommand registerCommand, UpdateUserCommand updateCommand, AddGroupCommand addGroupCommand, AddGroupMember addGroupMember){
         commands = new ArrayList<>();
         commands.add(registerCommand);
         commands.add(updateCommand);
         commands.add(addGroupCommand);
+        commands.add(addGroupMember);
     }
     public void execute(String commandName){
+        boolean isMatch = false;
         for(Command command: commands){
             if(command.isMatch(commandName)){
+                isMatch = true;
                 command.execute(commandName);
             }
         }
+        if(!isMatch){
+            System.out.println("Invalid Command");
+        }
+
     }
 }

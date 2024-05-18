@@ -1,8 +1,6 @@
 package com.praveen.splitwise.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,14 +13,8 @@ import java.util.List;
 public class Group extends BaseModel{
     private String name;
     private String description;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> members;
     @ManyToOne
     private User createdBy;
-    public void addMember(User user) {
-        if(members == null){
-            members = new ArrayList<>();
-        }
-        members.add(user);
-    }
 }

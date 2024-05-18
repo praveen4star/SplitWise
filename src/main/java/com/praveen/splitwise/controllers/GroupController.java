@@ -1,7 +1,8 @@
 package com.praveen.splitwise.controllers;
 
+import com.praveen.splitwise.dtos.AddGroupMemberRequestDto;
 import com.praveen.splitwise.dtos.AddGroupRequestDto;
-import com.praveen.splitwise.dtos.AddGroupResponseDto;
+import com.praveen.splitwise.dtos.GroupResponseDto;
 import com.praveen.splitwise.exceptions.UserNotFoundException;
 import com.praveen.splitwise.models.Group;
 import com.praveen.splitwise.services.GroupService;
@@ -15,8 +16,8 @@ public class GroupController {
     public GroupController(GroupService groupService) {
         this.groupService = groupService;
     }
-    public AddGroupResponseDto addGroup(AddGroupRequestDto addGroupRequestDto) {
-        AddGroupResponseDto addGroupResponseDto = new AddGroupResponseDto();
+    public GroupResponseDto addGroup(AddGroupRequestDto addGroupRequestDto) {
+        GroupResponseDto addGroupResponseDto = new GroupResponseDto();
         try{
             Group group = groupService.saveGroup(addGroupRequestDto.getUserId(), addGroupRequestDto.getGroupName());
             addGroupResponseDto.setGroupId(group.getId());
@@ -29,5 +30,18 @@ public class GroupController {
         }
         return addGroupResponseDto;
     }
+    public GroupResponseDto addMember(AddGroupMemberRequestDto addGroupMemberRequestDto){
+        GroupResponseDto addGroupResponseDto = new GroupResponseDto();
+        try{
+            Group group = groupService.addMember(addGroupMemberRequestDto.getGroupId(), addGroupMemberRequestDto.getUserId(), addGroupMemberRequestDto.getAddedByUserId());
+            addGroupResponseDto.setStatusCode(200);
+            addGroupResponseDto.setMessage("User added to group successfully");
+        }
+        catch (Exception e){
+            addGroupResponseDto.setStatusCode(400);
+            addGroupResponseDto.setMessage(e.getMessage());
+        }
 
+        return addGroupResponseDto;
+    }
 }

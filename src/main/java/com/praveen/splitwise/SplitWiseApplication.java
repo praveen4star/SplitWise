@@ -12,8 +12,8 @@ import java.util.Scanner;
 @SpringBootApplication
 @EnableJpaAuditing
 public class SplitWiseApplication implements CommandLineRunner {
-    private CommandRegistry commandRegistory;
-    private Scanner scanner;
+    private final CommandRegistry commandRegistory;
+    private final Scanner scanner;
     @Autowired
     public SplitWiseApplication(CommandRegistry commandRegistry){
         this.commandRegistory = commandRegistry;

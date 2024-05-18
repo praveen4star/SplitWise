@@ -2,7 +2,7 @@ package com.praveen.splitwise.commands;
 
 import com.praveen.splitwise.controllers.GroupController;
 import com.praveen.splitwise.dtos.AddGroupRequestDto;
-import com.praveen.splitwise.dtos.AddGroupResponseDto;
+import com.praveen.splitwise.dtos.GroupResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class AddGroupCommand implements Command{
         AddGroupRequestDto addGroupRequestDto = new AddGroupRequestDto();
         addGroupRequestDto.setGroupName(groupName);
         addGroupRequestDto.setUserId(userId);
-        AddGroupResponseDto addGroupResponseDto = groupController.addGroup(addGroupRequestDto);
+        GroupResponseDto addGroupResponseDto = groupController.addGroup(addGroupRequestDto);
         System.out.println(addGroupResponseDto.getMessage());
     }
 }

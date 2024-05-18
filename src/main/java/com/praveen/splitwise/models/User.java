@@ -1,9 +1,6 @@
 package com.praveen.splitwise.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +13,7 @@ public class User extends  BaseModel{
     private String name;
     private String phoneNumber;
     private String password;
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "members")
     List<Group> groups;
     @Enumerated(EnumType.ORDINAL)
     private UserStatus userStatus;
