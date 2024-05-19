@@ -24,6 +24,10 @@ public class SplitWiseApplication implements CommandLineRunner {
         while(!input.equalsIgnoreCase("exit")){
             System.out.println("Tell me, what do you want to do?");
             input = scanner.nextLine();
+            if(input.equalsIgnoreCase("exit")){
+                System.out.println("Good Bye!");
+                break;
+            }
             commandRegistory.execute(input);
         }
 

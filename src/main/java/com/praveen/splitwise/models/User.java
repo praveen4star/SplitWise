@@ -1,5 +1,6 @@
 package com.praveen.splitwise.models;
 
+import com.praveen.splitwise.models.constants.UserStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

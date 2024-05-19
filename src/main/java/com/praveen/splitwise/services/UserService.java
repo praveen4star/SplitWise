@@ -3,7 +3,7 @@ package com.praveen.splitwise.services;
 import com.praveen.splitwise.exceptions.UserAlreadyExistsException;
 import com.praveen.splitwise.exceptions.UserNotFoundException;
 import com.praveen.splitwise.models.User;
-import com.praveen.splitwise.models.UserStatus;
+import com.praveen.splitwise.models.constants.UserStatus;
 import com.praveen.splitwise.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

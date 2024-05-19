@@ -1,4 +1,4 @@
-package com.praveen.splitwise.models;
+package com.praveen.splitwise.models.constants;
 
 public enum ExpenseType {
     EXPENSE,
