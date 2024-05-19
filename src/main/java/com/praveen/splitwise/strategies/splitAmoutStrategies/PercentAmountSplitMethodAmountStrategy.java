@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RatioSplitMethodAmountStrategy implements SplitMethod {
+public class PercentAmountSplitMethodAmountStrategy implements AmountSplitMethod {
     @Override
-    public Map<Long, Integer> splitAmount(int amount, List<Long> userIds, List<Integer> splitFactors) {
+    public Map<Long, Integer> splitAmount(List<Integer> amounts, List<Long> userIds, List<Integer> splitFactors) {
+        int amount = amounts.stream().reduce(0,Integer::sum);
         Map<Long, Integer> userAmountMap = new HashMap<>();
-        int totalSplitFactor = splitFactors.stream().reduce(0, Integer::sum);
         int remainAmount = amount;
         for(int i = 0; i< userIds.size(); i++){
-            int userAmount = (int) Math.ceil((double) (splitFactors.get(i) * amount) /totalSplitFactor);
+            int userAmount = (int) Math.ceil((splitFactors.get(i)*amount)/100.0);
             if(i == userIds.size()-1){
                 userAmount = remainAmount;
             }

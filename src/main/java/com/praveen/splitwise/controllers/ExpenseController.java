@@ -1,5 +1,6 @@
 package com.praveen.splitwise.controllers;
 
+import com.praveen.splitwise.dtos.ExpenseRequestDto;
 import com.praveen.splitwise.dtos.ExpenseResponseDto;
 import com.praveen.splitwise.dtos.GroupExpenseRequestDto;
 import com.praveen.splitwise.models.Expense;
@@ -30,6 +31,29 @@ public class ExpenseController {
         }
         catch (Exception e) {
             expenseResponseDto.setStatusCode(400);
+            expenseResponseDto.setMessage(e.getMessage());
+        }
+        return expenseResponseDto;
+    }
+    public ExpenseResponseDto addExpense(ExpenseRequestDto expenseRequestDto){
+        ExpenseResponseDto expenseResponseDto = new ExpenseResponseDto();
+        try{
+            Expense expense = expenseService.saveExpense(
+                    expenseRequestDto.getCreatedBy(),
+                    expenseRequestDto.getUserIds(),
+                    expenseRequestDto.getPaidBy(),
+                    expenseRequestDto.getPaidAmounts(),
+                    expenseRequestDto.getSplitFactors(),
+                    expenseRequestDto.getDescription(),
+                    expenseRequestDto.getPayMode(),
+                    expenseRequestDto.getSplitMethodType()
+            );
+            expenseResponseDto.setExpense(expense);
+            expenseResponseDto.setStatusCode(200);
+            expenseResponseDto.setMessage("Expense added successfully");
+        }
+        catch (Exception e) {
+            expenseResponseDto.setStatusCode(500);
             expenseResponseDto.setMessage(e.getMessage());
         }
         return expenseResponseDto;

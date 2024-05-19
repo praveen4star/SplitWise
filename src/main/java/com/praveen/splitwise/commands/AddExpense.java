@@ -1,8 +1,11 @@
 package com.praveen.splitwise.commands;
 
+import com.praveen.splitwise.controllers.ExpenseController;
 import com.praveen.splitwise.dtos.ExpenseRequestDto;
+import com.praveen.splitwise.dtos.ExpenseResponseDto;
 import com.praveen.splitwise.models.constants.PayMode;
 import com.praveen.splitwise.models.constants.SplitMethodType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
@@ -13,14 +16,19 @@ import java.util.List;
 @Component
 public class AddExpense implements Command{
     /*
-        1. u1 Expense u2 u3 u4 iPay 1000 Equal Desc Last night dinner
-        2. u1 Expense u2 u3 iPay 1000 Percent 20 30 50 Desc House rent
-        3. u1 Expense u2 u3 u4 iPay 1000 Ratio 1 2 3 4 Desc Goa trip
-        4. u1 Expense u2 u3 iPay 1000 Exact 100 300 600 Desc Groceries
+        1. 2 Expense 1 52 iPay 1000 Equal Desc Last Night dinner
+        2. 1 Expense 2 52 iPay 1000 Percent 20 30 50 Desc House rent
+        3. 52 Expense 1 2 iPay 1000 Ratio 5 2 3 Desc Goa trip
+        4. 52 Expense 1 2 iPay 1000 Exact 100 300 600 Desc Groceries
         5. u1 Expense u2 u3 MultiPay 100 300 200 Equal Desc Lunch at office
         6. u1 Expense u2 u3 MultiPay 500 300 200 Percent 20 30 50 Desc Netflix subscription
 
      */
+    private final ExpenseController expenseController;
+    @Autowired
+    public AddExpense(ExpenseController expenseController) {
+        this.expenseController = expenseController;
+    }
     @Override
     public boolean isMatch(String cmd) {
         List<String> commandList = List.of(cmd.split(" "));
@@ -75,8 +83,12 @@ public class AddExpense implements Command{
             expenseRequestDto.setSplitFactors(splitFactors);
             expenseRequestDto.setDescription(commandList.subList(idx+1, commandList.size()).stream().reduce((s, s2) -> s + " " + s2).get());
         }
+        ExpenseResponseDto expenseResponseDto = expenseController.addExpense(expenseRequestDto);
+        System.out.println(expenseResponseDto.getMessage());
+        if(expenseResponseDto.getStatusCode() == 200){
+            System.out.println("Expense added successfully with id: " + expenseResponseDto.getExpense().getId());
+        }
 
-        System.out.println(expenseRequestDto);
     }
     private SplitMethodType getSplitMethodType(String splitMethod) {
         if (splitMethod.equalsIgnoreCase("Equal")) {
