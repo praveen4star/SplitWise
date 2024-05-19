@@ -10,4 +10,5 @@ public interface CommandKeyword {
     String EXPENSE = "Expense";
 
     String  MY_TOTAL = "MyTotal";
+    String HISTORY = "History";
 }

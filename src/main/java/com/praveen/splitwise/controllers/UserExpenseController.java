@@ -1,5 +1,6 @@
 package com.praveen.splitwise.controllers;
 
+import com.praveen.splitwise.dtos.UserExpensesResponseDto;
 import com.praveen.splitwise.dtos.UserTotalAmountResponseDto;
 import com.praveen.splitwise.services.UserExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,18 @@ public class UserExpenseController {
             userTotalAmountResponseDto.setMessage(e.getMessage());
         }
         return userTotalAmountResponseDto;
+    }
+    public UserExpensesResponseDto getUserHistory(Long userId) {
+        UserExpensesResponseDto userExpensesResponseDto = new UserExpensesResponseDto();
+        try{
+            userExpensesResponseDto.setUserExpenses(userExpenseService.getUserExpenses(userId));
+            userExpensesResponseDto.setStatusCode(200);
+            userExpensesResponseDto.setMessage("User expenses fetched successfully");
+        }
+        catch (Exception e) {
+            userExpensesResponseDto.setStatusCode(500);
+            userExpensesResponseDto.setMessage(e.getMessage());
+        }
+        return userExpensesResponseDto;
     }
 }
