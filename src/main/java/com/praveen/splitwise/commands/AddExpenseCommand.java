@@ -8,13 +8,12 @@ import com.praveen.splitwise.models.constants.SplitMethodType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class AddExpense implements Command{
+public class AddExpenseCommand implements Command{
     /*
         1. 2 Expense 1 52 iPay 1000 Equal Desc Last Night dinner
         2. 1 Expense 2 52 iPay 1000 Percent 20 30 50 Desc House rent
@@ -26,7 +25,7 @@ public class AddExpense implements Command{
      */
     private final ExpenseController expenseController;
     @Autowired
-    public AddExpense(ExpenseController expenseController) {
+    public AddExpenseCommand(ExpenseController expenseController) {
         this.expenseController = expenseController;
     }
     @Override

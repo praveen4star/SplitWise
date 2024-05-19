@@ -8,4 +8,6 @@ public interface CommandKeyword {
     String GET_USER_GROUPS = "groups";
     String GROUP_EXPENSE = "groupExpense";
     String EXPENSE = "Expense";
+
+    String  MY_TOTAL = "MyTotal";
 }
