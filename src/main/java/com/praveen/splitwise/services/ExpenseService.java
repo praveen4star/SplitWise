@@ -39,9 +39,10 @@ public class ExpenseService {
             throw new GroupNotFoundException("Group not found "+groupId);
         }
         Group group = groupOptional.get();
-//        if(!group.getMembers().contains(user)){
-//            throw new InvalidGroupQueries("User not part of the group");
-//        }
+        List<User> members = group.getMembers();
+        if(members.stream().noneMatch(member -> member.getId().equals(createdBy))){
+            throw new InvalidGroupQueries("User not part of the group");
+        }
 
         /* creating the expense */
         Expense expense = new Expense();
@@ -59,7 +60,7 @@ public class ExpenseService {
         userExpense.setUserExpenseType(UserExpenseType.PAID);
         userExpenseRepository.save(userExpense);
 
-        List<User> members = group.getMembers();
+
         int share = amount/members.size();
         for(int i = 0; i<members.size(); i++){
             /* saving the expense for owe user */
