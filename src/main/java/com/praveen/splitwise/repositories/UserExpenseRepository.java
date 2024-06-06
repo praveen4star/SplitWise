@@ -13,4 +13,5 @@ public interface UserExpenseRepository extends JpaRepository<UserExpense, Long> 
     @Query("SELECT SUM(CASE WHEN t.userExpenseType = 0 THEN t.amount ELSE -t.amount END) FROM UserExpense t WHERE t.user.id = :userId")
     int getUserTotalAmount(@Param("userId") Long userId);
     List<UserExpense> getUserExpenseByUserId(Long userId);
+    Optional<List<UserExpense>> findAllByExpenseId(Long expenseId);
 }

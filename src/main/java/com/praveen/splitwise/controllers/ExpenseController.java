@@ -3,10 +3,13 @@ package com.praveen.splitwise.controllers;
 import com.praveen.splitwise.dtos.ExpenseRequestDto;
 import com.praveen.splitwise.dtos.ExpenseResponseDto;
 import com.praveen.splitwise.dtos.GroupExpenseRequestDto;
+import com.praveen.splitwise.dtos.TransactionResponseDto;
 import com.praveen.splitwise.models.Expense;
 import com.praveen.splitwise.services.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ExpenseController {
@@ -57,5 +60,8 @@ public class ExpenseController {
             expenseResponseDto.setMessage(e.getMessage());
         }
         return expenseResponseDto;
+    }
+    public List<TransactionResponseDto> settleUpGroup(Long groupId){
+        return expenseService.settleUpGroup(groupId);
     }
 }

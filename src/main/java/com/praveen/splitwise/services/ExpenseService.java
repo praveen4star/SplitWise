@@ -1,5 +1,6 @@
 package com.praveen.splitwise.services;
 
+import com.praveen.splitwise.dtos.TransactionResponseDto;
 import com.praveen.splitwise.exceptions.GroupNotFoundException;
 import com.praveen.splitwise.exceptions.InvalidGroupQueries;
 import com.praveen.splitwise.exceptions.UserNotFoundException;
@@ -13,11 +14,14 @@ import com.praveen.splitwise.repositories.ExpenseRepository;
 import com.praveen.splitwise.repositories.GroupRepository;
 import com.praveen.splitwise.repositories.UserExpenseRepository;
 import com.praveen.splitwise.repositories.UserRepository;
+import com.praveen.splitwise.strategies.settleMentStrategies.SettleUpFactory;
 import com.praveen.splitwise.strategies.splitAmoutStrategies.AmountSplitMethod;
 import com.praveen.splitwise.strategies.splitAmoutStrategies.SplitAmountStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -116,5 +120,17 @@ public class ExpenseService {
             userExpenseRepository.save(userExpense);
         }
         return expense;
+    }
+    public List<TransactionResponseDto> settleUpGroup(Long groupId) {
+        Optional<List<Expense>> optionalExpenses = expenseRepository.findAllByGroupId(groupId);
+        if(optionalExpenses.isEmpty()){
+            return List.of();
+        }
+        List<Expense> expenses = optionalExpenses.get();
+        List<UserExpense> userExpense = new ArrayList<>();
+        for(Expense expense: expenses){
+            userExpense.addAll(userExpenseRepository.findAllByExpenseId(expense.getId()).get());
+        }
+        return SettleUpFactory.getSettleUpStrategy().settle(userExpense);
     }
 }

@@ -11,4 +11,5 @@ public interface CommandKeyword {
 
     String  MY_TOTAL = "MyTotal";
     String HISTORY = "History";
+    String SETTLE_UP = "SettleUp";
 }

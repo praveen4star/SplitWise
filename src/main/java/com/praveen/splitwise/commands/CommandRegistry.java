@@ -19,7 +19,8 @@ public class CommandRegistry {
             GroupExpenseCommand groupExpenseCommand,
             AddExpenseCommand addExpenseCommand,
             UserTotalAmountCommand userTotalAmountCommand,
-            UserHistoryCommand userHistoryCommand
+            UserHistoryCommand userHistoryCommand,
+            SettleUpGroupCommand settleUpGroupCommand
     ){
         commands = new ArrayList<>();
         commands.add(registerCommand);
@@ -31,6 +32,7 @@ public class CommandRegistry {
         commands.add(addExpenseCommand);
         commands.add(userTotalAmountCommand);
         commands.add(userHistoryCommand);
+        commands.add(settleUpGroupCommand);
     }
     public void execute(String commandName){
         boolean isMatch = false;
